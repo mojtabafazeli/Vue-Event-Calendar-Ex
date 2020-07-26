@@ -5,7 +5,7 @@ const $years = ['2020', '2021', '2022', '2023', '2024']
 let $today = new Date();
 let $firstDayOfMonth = new Date($today.getUTCFullYear(), $today.getMonth(), 1)
 let $lastDayOfMonth = new Date($today.getUTCFullYear(), $monthsNames.indexOf($today.getMonth()) + 1, 0)
-let $todayOb = {
+let $dateObject = {
     day: $today.getDay(),
     date: $today.getDate(),
     month: $monthsNames[$today.getMonth()],
@@ -16,14 +16,14 @@ let $todayOb = {
 
 
 Vue.component('date', {
-    props: ['event', 'i', 'today', 'selectedday'],
+    props: ['event', 'i', 'today', 'dateobject'],
     template: `
      <div class="card date px-2 py-1">
-                        <p :style = "{visibility: i > selectedday.firstDayOfMonth && i <= selectedday.lastDayOfMonth ? 'visible' : 'hidden'}" >
-                        <span :class = "i - selectedday.firstDayOfMonth == today.date && 
-                        selectedday.month == today.month &&
-                            selectedday.year == today.year ? 'today-date' : ''">
-                            {{i - selectedday.firstDayOfMonth}}
+                        <p :style = "{visibility: i > dateobject.firstDayOfMonth && i <= dateobject.lastDayOfMonth ? 'visible' : 'hidden'}" >
+                        <span :class = "i - dateobject.firstDayOfMonth == today.date && 
+                        dateobject.month == today.month &&
+                            dateobject.year == today.year ? 'today-date' : ''">
+                            {{i - dateobject.firstDayOfMonth}}
                             </span>
                             </p>
                         <div class="d-flex justify-content-between">
@@ -38,44 +38,48 @@ Vue.component('date', {
 const app = new Vue({
     el: '#app',
     data: {
-        today: $todayOb,
+        today: $dateObject,
         daysNames: $daysNames,
         months: $monthsNames,
         years: $years,
-        selectedDay: {},
-        dates: [{}],
+        dateObject: {},
+        events: [{
+            title: '', //
+            date: {},
+            description:'',
+        }],
     },
 
     mounted() {
-        console.log($todayOb)
+        console.log($dateObject)
         if (localStorage.getItem('today')) {
-            this.selectedDay = JSON.parse(localStorage.getItem('today'));
+            this.dateObject = JSON.parse(localStorage.getItem('today'));
         } else {
-            this.selectedDay = $todayOb;
+            this.dateObject = $dateObject;
         }
     },
 
     methods: {
         updateMonth: function (e) {
-            this.selectedDay.month = e.target.value;
+            this.dateObject.month = e.target.value;
             let firstDayDate = new Date();
             let lastDayDate = new Date();
-            firstDayDate.setFullYear(this.selectedDay.year, this.months.indexOf(this.selectedDay.month), 1);
-            lastDayDate.setFullYear(this.selectedDay.year, this.months.indexOf(this.selectedDay.month) + 1, 0);
-            this.selectedDay.firstDayOfMonth = firstDayDate.getDay();
-            this.selectedDay.lastDayOfMonth = lastDayDate.getDate();
-            localStorage.setItem('today', JSON.stringify(this.selectedDay));
+            firstDayDate.setFullYear(this.dateObject.year, this.months.indexOf(this.dateObject.month), 1);
+            lastDayDate.setFullYear(this.dateObject.year, this.months.indexOf(this.dateObject.month) + 1, 0);
+            this.dateObject.firstDayOfMonth = firstDayDate.getDay();
+            this.dateObject.lastDayOfMonth = lastDayDate.getDate();
+            localStorage.setItem('today', JSON.stringify(this.dateObject));
 
         },
         updateYear: function (e) {
-            this.selectedDay.year = e.target.value;
+            this.dateObject.year = e.target.value;
             let firstDayDate = new Date();
             let lastDayDate = new Date();
-            firstDayDate.setFullYear(this.selectedDay.year, this.months.indexOf(this.selectedDay.month), 1);
-            lastDayDate.setFullYear(this.selectedDay.year, this.months.indexOf(this.selectedDay.month) + 1, 0);
-            this.selectedDay.firstDayOfMonth = firstDayDate.getDay();
-            this.selectedDay.lastDayOfMonth = lastDayDate.getDate();
-            localStorage.setItem('today', JSON.stringify(this.selectedDay));
+            firstDayDate.setFullYear(this.dateObject.year, this.months.indexOf(this.dateObject.month), 1);
+            lastDayDate.setFullYear(this.dateObject.year, this.months.indexOf(this.dateObject.month) + 1, 0);
+            this.dateObject.firstDayOfMonth = firstDayDate.getDay();
+            this.dateObject.lastDayOfMonth = lastDayDate.getDate();
+            localStorage.setItem('today', JSON.stringify(this.dateObject));
         }
     }
 })

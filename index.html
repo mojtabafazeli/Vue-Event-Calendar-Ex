@@ -14,15 +14,15 @@
 <body>
     <div id="app" class="container">
         <header class="d-flex justify-content-between align-items-center px-3 py-4" v-cloak>
-            <h2><span class="font-weight-bold">{{ selectedDay.month }}</span> {{ selectedDay.year }}</h2>
+            <h2><span class="font-weight-bold">{{ dateObject.month }}</span> {{ dateObject.year }}</h2>
             <div class="select-date d-flex content-justify-between align-items-center">
                 <button class="add-event btn btn-light border rounded p-0 m-0 mr-1"><i class="fa fa-plus"
                         aria-hidden="true"></i>
                 </button>
-                <select class="mr-1 text-center rounded" v-model="selectedDay.month" @change="updateMonth">
+                <select class="mr-1 text-center rounded" v-model="dateObject.month" @change="updateMonth">
                     <option v-for="month in months" :value="month">{{ month }}</option>
                 </select>
-                <select name="year" value="2020" class="rounded " v-model="selectedDay.year" @change="updateYear">
+                <select name="year" value="2020" class="rounded " v-model="dateObject.year" @change="updateYear">
                     <option v-for="year in years" :value="year">{{ year }}</option>
                 </select>
             </div>
@@ -34,7 +34,7 @@
                     <div class="card day" v-for="dayName in daysNames"> {{ dayName }}</div>
                 </div>
                 <div class="days">
-                    <date :i='i' :today='today' :selectedday="selectedDay" v-for="i in 35">
+                    <date :i='i' :today='today' :dateobject="dateObject" v-for="i in 35">
                     </date>
                 </div>
             </div>
