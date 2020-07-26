@@ -16,21 +16,29 @@ let $todayOb = {
 
 
 Vue.component('date', {
-    props: ['day', 'event', 'time', 'firstday', 'lastday', 'i'],
+    props: ['event', 'i', 'today', 'selectedday'],
     template: `
      <div class="card date px-2 py-1">
-                        <p :style="{visibility: i > firstday && i <= lastday ? 'visible' : 'hidden'}">{{ day }}</p>
+                        <p :style = "{visibility: i > selectedday.firstDayOfMonth && i <= selectedday.lastDayOfMonth ? 'visible' : 'hidden'}" >
+                        <span :class = "i - selectedday.firstDayOfMonth == today.date && 
+                        selectedday.month == today.month &&
+                            selectedday.year == today.year ? 'today-date' : ''">
+                            {{i - selectedday.firstDayOfMonth}}
+                            </span>
+                            </p>
                         <div class="d-flex justify-content-between">
                             <span class="mr-1">{{ event }}</span>
-                            <span class="">{{ time }}</span>
+                            <span class="time"></span>
                         </div>
 
                     </div>
     `
 })
+
 const app = new Vue({
     el: '#app',
     data: {
+        today: $todayOb,
         daysNames: $daysNames,
         months: $monthsNames,
         years: $years,

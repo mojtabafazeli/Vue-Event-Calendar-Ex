@@ -24,7 +24,7 @@ header {
 }
 
 .days span {
-    font-size: .75rem;
+    font-size: .8rem;
 }
 
 .days span:nth-child(1) {
@@ -32,7 +32,6 @@ header {
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: bold;
-    text-align: left;
 }
 
 .card.day {
@@ -49,4 +48,19 @@ header {
 .card.date:nth-child(7n+0),
 .card.date:nth-child(7n+1) {
     background-color: rgba(241, 241, 241, 0.863);
+}
+
+.today-date {
+    text-align: center;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px rgb(126, 0, 0) solid;
+    border-radius: 50%;
+    color: white;
+    background-color: rgb(126, 0, 0);
+}
+
+.time {
+    color: gray;
 }
