@@ -1,0 +1,52 @@
+.container {
+    max-width: 992px;
+    min-width: 576px;
+}
+
+header {
+    background: linear-gradient(180deg, rgba(241, 241, 241, 1) 0%, rgba(255, 255, 255, 1) 78%);
+}
+
+.select-date {
+    height: 30px;
+}
+
+.add-event {
+    text-align: center;
+    width: 27px;
+    height: 27px;
+}
+
+.calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: right;
+}
+
+.days span {
+    font-size: .75rem;
+}
+
+.days span:nth-child(1) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    text-align: left;
+}
+
+.card.day {
+    border: none;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.card.date {
+    border-radius: 0px;
+    height: 100px;
+}
+
+.card.date:nth-child(7n+0),
+.card.date:nth-child(7n+1) {
+    background-color: rgba(241, 241, 241, 0.863);
+}

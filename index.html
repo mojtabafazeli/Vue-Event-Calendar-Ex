@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/" lang="en">
+
+<head>
+    <title>Event Calendar</title>
+    <meta http-equiv="Content-Type" content="text/html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://use.fontawesome.com/4ceeba9e7c.js"></script>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <header class="d-flex justify-content-between align-items-center px-3 py-4">
+            <h2><span class="font-weight-bold">{{ selectedDay.month }}</span> {{ selectedDay.year }}</h2>
+            <div class="select-date d-flex content-justify-between align-items-center">
+                <button class="add-event btn btn-light border rounded p-0 m-0 mr-1"><i class="fa fa-plus"
+                        aria-hidden="true"></i>
+                </button>
+                <select class="mr-1 text-center rounded" v-model="selectedDay.month" @change="updateMonth">
+                    <option v-for="month in months" :value="month">{{ month }}</option>
+                </select>
+                <select name="year" value="2020" class="rounded " v-model="selectedDay.year" @change="updateYear">
+                    <option v-for="year in years" :value="year">{{ year }}</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="calendar">
+            <div class="calendar">
+                <div class="days">
+                    <div class="card day" v-for="dayName in daysNames"> {{ dayName }}</div>
+                </div>
+                <div class="days">
+                    <date :i="i" :day="i - (selectedDay.firstDayOfMonth)" :event="''" :time="'7'"
+                        :firstday="selectedDay.firstDayOfMonth"
+                        :lastday="selectedDay.lastDayOfMonth + selectedDay.firstDayOfMonth" v-for="i in 35">
+                    </date>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script rel="script" src="script.js"></script>
+</body>
+
+</html>
