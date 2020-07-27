@@ -16,7 +16,7 @@ let $dateObject = {
 
 
 Vue.component('date', {
-    props: ['event', 'i', 'today', 'dateobject'],
+    props: ['i', 'today', 'dateobject', 'event', 'index'],
     template: `
      <div class="card date px-2 py-1">
                         <p :style = "{visibility: i > dateobject.firstDayOfMonth && i <= dateobject.lastDayOfMonth ? 'visible' : 'hidden'}" >
@@ -27,7 +27,7 @@ Vue.component('date', {
                             </span>
                             </p>
                         <div class="d-flex justify-content-between">
-                            <span class="mr-1">{{ event }}</span>
+                            <span class="mr-1"></span>
                             <span class="time"></span>
                         </div>
 
@@ -43,11 +43,7 @@ const app = new Vue({
         months: $monthsNames,
         years: $years,
         dateObject: {},
-        events: [{
-            title: '', //
-            date: {},
-            description:'',
-        }],
+        events: [],
     },
 
     mounted() {
@@ -80,6 +76,15 @@ const app = new Vue({
             this.dateObject.firstDayOfMonth = firstDayDate.getDay();
             this.dateObject.lastDayOfMonth = lastDayDate.getDate();
             localStorage.setItem('today', JSON.stringify(this.dateObject));
+        },
+        addEvent: function (date, i) {
+            let index = date.year + date.month + (i - date.firstDayOfMonth);
+            this.events[index] = {
+                time: index,
+                title: "title" + index,
+                desc: "desc" + index
+            };
+            console.log(this.events)
         }
     }
 })
