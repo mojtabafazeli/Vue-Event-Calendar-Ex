@@ -46,7 +46,6 @@ const app = new Vue({
     },
 
     mounted() {
-        console.log($dateObject)
         if (localStorage.getItem('date')) {
             this.dateObject = JSON.parse(localStorage.getItem('date'));
         } else {
@@ -96,8 +95,14 @@ const app = new Vue({
 
         getEventTitle: function (i) {
             if (this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)]) {
-                let index = this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)].title;
-                return index;
+                let title = this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)].title;
+                return title;
+            }
+        },
+        getEventTime: function (i) {
+            if (this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)]) {
+                let time = this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)].time;
+                return time;
             }
         }
     },
