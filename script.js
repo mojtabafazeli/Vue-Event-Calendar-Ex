@@ -28,7 +28,7 @@ Vue.component('date', {
                             </p>
                         <div div class = "d-flex justify-content-between" v-if="events[eventindex]" >
                             <span class="mr-1"> {{ events[eventindex].title }}</span>
-                            <span class="time">10:00AM</span>
+                            <span class="time">{{ events[eventindex].time }}</span>
                         </div>
                     </div>
     `
@@ -42,13 +42,7 @@ const app = new Vue({
         months: $monthsNames,
         years: $years,
         dateObject: {},
-        events: {
-            '2020-06-17': {
-                title: 'new one',
-                time: '10:00',
-                desc: ''
-            }
-        },
+        events: {},
         eventTitle: '',
         eventDate: '',
         eventTime: ''
@@ -92,6 +86,7 @@ const app = new Vue({
             let eventDate = document.getElementById('eventDate').value;
             let eventTime = document.getElementById('eventTime').value;
             let eventTitle = document.getElementById('eventTitle').value;
+            let eventDesc = document.getElementById('eventDesc').value;
             let index = '';
             if (eventDate.charAt(5) == 0) {
                 index = eventDate.substr(0, 5) + eventDate.substr(6);
@@ -99,12 +94,16 @@ const app = new Vue({
             if (index.charAt(7) == 0) {
                 index = index.substr(0, 7) + index.substr(8);
             }
-            this.$set(this.events, index, {
-                time: eventTime,
-                title: eventTitle,
-                desc: "desc"
-            });
-            localStorage.setItem('events', JSON.stringify(this.events));
+            if (eventTitle != '') {
+                this.$set(this.events, index, {
+                    time: eventTime,
+                    title: eventTitle,
+                    desc: eventDesc
+                });
+                localStorage.setItem('events', JSON.stringify(this.events));
+            } else {
+                alert('Please enter an event')
+            }
         },
 
         delEvent() {
