@@ -30,7 +30,6 @@ Vue.component('date', {
                             <span class="mr-1"> {{ events[eventindex].title }}</span>
                             <span class="time">10:00AM</span>
                         </div>
-
                     </div>
     `
 })
@@ -89,6 +88,17 @@ const app = new Vue({
             });
             console.log(this.events)
             localStorage.setItem('events', JSON.stringify(this.events));
+        },
+
+        getEventIndex(i) {
+            return this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)
+        },
+
+        getEventTitle: function (i) {
+            if (this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)]) {
+                let index = this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)].title;
+                return index;
+            }
         }
     },
 

@@ -64,3 +64,10 @@ header {
 .time {
     color: gray;
 }
+
+.eventButton {
+    border: none;
+    background-color: initial;
+    padding: 0;
+    margin: 0;
+}
