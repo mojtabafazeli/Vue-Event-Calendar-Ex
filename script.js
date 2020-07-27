@@ -45,7 +45,7 @@ const app = new Vue({
         events: {
             '2020-6-17': {
                 title: 'new one',
-                time: '10:00 AM',
+                time: '10:00',
                 desc: ''
             }
         }

@@ -27,7 +27,7 @@ header {
     font-size: .8rem;
 }
 
-.days span:nth-child(1) {
+.days span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
