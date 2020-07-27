@@ -118,6 +118,7 @@ const app = new Vue({
             console.log(index);
             Vue.delete(this.events, index);
             localStorage.setItem('events', JSON.stringify(this.events));
+            location.reload();
         },
 
         getEventIndex(i) {
