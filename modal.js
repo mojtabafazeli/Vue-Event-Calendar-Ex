@@ -13,5 +13,19 @@ $('#myModal').on('show.bs.modal', function (event) {
         modal.find('.date').val('');
     }
 
-    modal.find('.time').val(time)
+    try {
+        modal.find('.time').val(time)
+    } catch (e) {
+        modal.find('.time').val('');
+    }
+
+    if ($('.title').val() == '') {
+        $('.add-update').html('Add event')
+        $('.delete').hide();
+    } else {
+        $('.add-update').html('Update event')
+        $('.delete').show();
+    }
 })
+
+$('#myModal').hide();

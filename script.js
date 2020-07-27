@@ -43,12 +43,15 @@ const app = new Vue({
         years: $years,
         dateObject: {},
         events: {
-            '2020-6-17': {
+            '2020-06-17': {
                 title: 'new one',
                 time: '10:00',
                 desc: ''
             }
-        }
+        },
+        eventTitle: '',
+        eventDate: '',
+        eventTime: ''
     },
 
     mounted() {
@@ -57,6 +60,7 @@ const app = new Vue({
         } else {
             this.dateObject = $dateObject;
         }
+
         if (localStorage.getItem('events')) {
             this.events = JSON.parse(localStorage.getItem('events'));
         }
@@ -84,30 +88,51 @@ const app = new Vue({
             this.dateObject.lastDateOfMonth = lastDayDate.getDate();
             localStorage.setItem('date', JSON.stringify(this.dateObject));
         },
-        addEvent(date, i) {
-            let index = date.year + date.month + (i - date.firstDayOfMonth);
+        addEvent() {
+            let eventDate = document.getElementById('eventDate').value;
+            let eventTime = document.getElementById('eventTime').value;
+            let eventTitle = document.getElementById('eventTitle').value;
+            let index = '';
+            if (eventDate.charAt(5) == 0) {
+                index = eventDate.substr(0, 5) + eventDate.substr(6);
+            }
+            if (index.charAt(7) == 0) {
+                index = index.substr(0, 7) + index.substr(8);
+            }
             this.$set(this.events, index, {
-                time: index,
-                title: "title",
+                time: eventTime,
+                title: eventTitle,
                 desc: "desc"
             });
-            console.log(this.events)
+            localStorage.setItem('events', JSON.stringify(this.events));
+        },
+
+        delEvent() {
+            let eventDate = document.getElementById('eventDate').value;
+            if (eventDate.charAt(5) == 0) {
+                index = eventDate.substr(0, 5) + eventDate.substr(6);
+            }
+            if (index.charAt(7) == 0) {
+                index = index.substr(0, 7) + index.substr(8);
+            }
+            console.log(index);
+            Vue.delete(this.events, index);
             localStorage.setItem('events', JSON.stringify(this.events));
         },
 
         getEventIndex(i) {
-            return this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)
+            return this.dateObject.year + "-" + (this.months.indexOf(this.dateObject.month) + 1) + "-" + (i - this.dateObject.firstDayOfMonth)
         },
 
         getEventTitle: function (i) {
-            if (this.events[this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)]) {
-                let title = this.events[this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)].title;
+            if (this.events[this.dateObject.year + "-" + (this.months.indexOf(this.dateObject.month) + 1) + "-" + (i - this.dateObject.firstDayOfMonth)]) {
+                let title = this.events[this.dateObject.year + "-" + (this.months.indexOf(this.dateObject.month) + 1) + "-" + (i - this.dateObject.firstDayOfMonth)].title;
                 return title;
             }
         },
         getEventTime: function (i) {
-            if (this.events[this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)]) {
-                let time = this.events[this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)].time;
+            if (this.events[this.dateObject.year + "-" + (this.months.indexOf(this.dateObject.month) + 1) + "-" + (i - this.dateObject.firstDayOfMonth)]) {
+                let time = this.events[this.dateObject.year + "-" + (this.months.indexOf(this.dateObject.month) + 1) + "-" + (i - this.dateObject.firstDayOfMonth)].time;
                 return time;
             }
         },
@@ -117,10 +142,4 @@ const app = new Vue({
             return date;
         }
     },
-
-    computed: {
-        updateEvents: function () {
-            return events;
-        }
-    }
 })
