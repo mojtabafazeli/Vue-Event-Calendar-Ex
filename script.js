@@ -42,7 +42,13 @@ const app = new Vue({
         months: $monthsNames,
         years: $years,
         dateObject: {},
-        events: {}
+        events: {
+            '2020-6-17': {
+                title: 'new one',
+                time: '10:00 AM',
+                desc: ''
+            }
+        }
     },
 
     mounted() {
@@ -90,20 +96,25 @@ const app = new Vue({
         },
 
         getEventIndex(i) {
-            return this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)
+            return this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)
         },
 
         getEventTitle: function (i) {
-            if (this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)]) {
-                let title = this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)].title;
+            if (this.events[this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)]) {
+                let title = this.events[this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)].title;
                 return title;
             }
         },
         getEventTime: function (i) {
-            if (this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)]) {
-                let time = this.events[this.dateObject.year + this.dateObject.month + (i - this.dateObject.firstDayOfMonth)].time;
+            if (this.events[this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)]) {
+                let time = this.events[this.dateObject.year + "-" + this.months.indexOf(this.dateObject.month) + "-" + (i - this.dateObject.firstDayOfMonth)].time;
                 return time;
             }
+        },
+
+        getEventDate: function (i) {
+            let date = this.dateObject.month + " " + (i - this.dateObject.firstDayOfMonth) + " " + this.dateObject.year
+            return date;
         }
     },
 

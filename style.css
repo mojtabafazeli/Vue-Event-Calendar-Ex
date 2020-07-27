@@ -71,3 +71,12 @@ header {
     padding: 0;
     margin: 0;
 }
+
+.date-time label {
+    width: 100%;
+}
+
+.date-time input {
+    width: auto;
+    display: inline;
+}
