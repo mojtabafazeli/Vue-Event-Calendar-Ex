@@ -34,8 +34,9 @@
                     <div class="card day" v-for="dayName in daysNames"> {{ dayName }}</div>
                 </div>
                 <div class="days">
-                    <date :i='i' :today='today' :dateobject='dateObject' v-for="i in 35"
-                        @click.native="addEvent(dateObject, i)">
+                    <date :i='i' :today='today' :dateobject='dateObject' :events='events'
+                        :eventindex="dateObject.year + dateObject.month + (i - dateObject.firstDayOfMonth)"
+                        v-for="i in 35" @click.native="addEvent(dateObject, i)">
                     </date>
                 </div>
             </div>
