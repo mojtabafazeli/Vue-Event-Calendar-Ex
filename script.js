@@ -101,9 +101,11 @@ const app = new Vue({
                     desc: eventDesc
                 });
                 localStorage.setItem('events', JSON.stringify(this.events));
+                location.reload();
             } else {
                 alert('Please enter an event')
             }
+
         },
 
         delEvent() {
