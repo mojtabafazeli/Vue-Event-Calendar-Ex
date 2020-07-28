@@ -16,7 +16,7 @@ let $dateObject = {
 
 
 Vue.component('date', {
-    props: ['i', 'today', 'dateobject', 'events', 'eventindex'],
+    props: ['i', 'today', 'dateobject', 'events', 'eventindex', 'key'],
     template: `
      <div class="card date px-2 py-1">
                         <p :style = "{visibility: i > dateobject.firstDayOfMonth && i <= dateobject.lastDateOfMonth + dateobject.firstDayOfMonth? 'visible' : 'hidden'}" >
@@ -45,7 +45,8 @@ const app = new Vue({
         events: {},
         eventTitle: '',
         eventDate: '',
-        eventTime: ''
+        eventTime: '',
+        componentKey: false
     },
 
     mounted() {
@@ -101,7 +102,7 @@ const app = new Vue({
                     desc: eventDesc
                 });
                 localStorage.setItem('events', JSON.stringify(this.events));
-                location.reload();
+                this.componentKey = !this.componentKey;
             } else {
                 alert('Please enter an event')
             }
@@ -119,7 +120,7 @@ const app = new Vue({
             console.log(index);
             Vue.delete(this.events, index);
             localStorage.setItem('events', JSON.stringify(this.events));
-            location.reload();
+            this.componentKey = !this.componentKey;
         },
 
         getEventIndex(i) {

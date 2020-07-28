@@ -39,7 +39,7 @@
                         v-for="i in 35"
                         :data-target="(i > dateObject.firstDayOfMonth && i <= dateObject.lastDateOfMonth + dateObject.firstDayOfMonth)?'#myModal':''"
                         data-toggle="modal" :data-title=getEventTitle(i) :data-date=getEventDate(i)
-                        :data-time=getEventTime(i)>
+                        :data-time=getEventTime(i) :key="componentKey">
                     </date>
                 </div>
             </div>
