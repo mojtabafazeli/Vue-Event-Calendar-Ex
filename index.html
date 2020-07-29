@@ -15,7 +15,9 @@
 <body>
     <div id="app" class="container">
         <header class="d-flex justify-content-between align-items-center px-3 py-4" v-cloak>
-            <h2><span class="font-weight-bold">{{ dateObject.month }}</span> {{ dateObject.year }}</h2>
+            <transition name="slide-fade">
+                <h2 v-if="show"><span class="font-weight-bold">{{ dateObject.month }}</span> {{ dateObject.year }}</h2>
+            </transition>
             <div class="select-date d-flex content-justify-between align-items-center">
                 <button class="add-event btn btn-light border rounded p-0 m-0 mr-1"><i class="fa fa-plus"
                         aria-hidden="true" data-target="#myModal" data-toggle="modal"></i>
@@ -34,14 +36,16 @@
                 <div class="days">
                     <div class="card day" v-for="dayName in daysNames"> {{ dayName }}</div>
                 </div>
-                <div class="days">
-                    <date :i='i' :today='today' :dateobject='dateObject' :events='events' :eventindex=getEventIndex(i)
-                        v-for="i in 35"
-                        :data-target="(i > dateObject.firstDayOfMonth && i <= dateObject.lastDateOfMonth + dateObject.firstDayOfMonth)?'#myModal':''"
-                        data-toggle="modal" :data-title=getEventTitle(i) :data-date=getEventDate(i)
-                        :data-time=getEventTime(i) :key="componentKey">
-                    </date>
-                </div>
+                <transition name="slide-fade">
+                    <div v-if="show" class="days">
+                        <date :i='i' :today='today' :dateobject='dateObject' :events='events'
+                            :eventindex=getEventIndex(i) v-for="i in 35"
+                            :data-target="(i > dateObject.firstDayOfMonth && i <= dateObject.lastDateOfMonth + dateObject.firstDayOfMonth)?'#myModal':''"
+                            data-toggle="modal" :data-title=getEventTitle(i) :data-date=getEventDate(i)
+                            :data-time=getEventTime(i) :key="componentKey">
+                        </date>
+                    </div>
+                </transition>
             </div>
         </div>
 

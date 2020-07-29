@@ -48,7 +48,8 @@ const app = new Vue({
         eventTitle: '',
         eventDate: '',
         eventTime: '',
-        componentKey: false
+        componentKey: false,
+        show: true
     },
 
     mounted() {
@@ -65,6 +66,7 @@ const app = new Vue({
 
     methods: {
         updateMonth: function (e) {
+            this.show = !this.show;
             this.dateObject.month = e.target.value;
             let firstDayDate = new Date();
             let lastDayDate = new Date();
@@ -73,9 +75,11 @@ const app = new Vue({
             this.dateObject.firstDayOfMonth = firstDayDate.getDay();
             this.dateObject.lastDateOfMonth = lastDayDate.getDate();
             localStorage.setItem('date', JSON.stringify(this.dateObject));
+            setTimeout(() => this.show = !this.show, 100);
 
         },
         updateYear: function (e) {
+            this.show = !this.show;
             this.dateObject.year = e.target.value;
             let firstDayDate = new Date();
             let lastDayDate = new Date();
@@ -84,6 +88,7 @@ const app = new Vue({
             this.dateObject.firstDayOfMonth = firstDayDate.getDay();
             this.dateObject.lastDateOfMonth = lastDayDate.getDate();
             localStorage.setItem('date', JSON.stringify(this.dateObject));
+            setTimeout(() => this.show = !this.show, 100);
         },
         addEvent() {
             let eventDate = document.getElementById('eventDate').value;
