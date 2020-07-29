@@ -5,11 +5,13 @@ const $years = ['2020', '2021', '2022', '2023', '2024']
 let $today = new Date();
 let $firstDayOfMonth = new Date($today.getUTCFullYear(), $today.getMonth(), 1)
 let $lastDateOfMonth = new Date($today.getUTCFullYear(), $monthsNames.indexOf($today.getMonth()) + 1, 0)
+//creating a prototype for each month layout
 let $dateObject = {
     day: $today.getDay(),
     date: $today.getDate(),
     month: $monthsNames[$today.getMonth()],
     year: $today.getUTCFullYear(),
+    //getting the day name of the first day and last day of the month to create the correct layout for the calendar
     firstDayOfMonth: $firstDayOfMonth.getDay(),
     lastDateOfMonth: $lastDateOfMonth.getDate()
 };
@@ -102,6 +104,7 @@ const app = new Vue({
                     desc: eventDesc
                 });
                 localStorage.setItem('events', JSON.stringify(this.events));
+                //to force the component to re-render itself;
                 this.componentKey = !this.componentKey;
             } else {
                 alert('Please enter an event')
@@ -120,6 +123,7 @@ const app = new Vue({
             console.log(index);
             Vue.delete(this.events, index);
             localStorage.setItem('events', JSON.stringify(this.events));
+            //to force the component to re-render itself;
             this.componentKey = !this.componentKey;
         },
 
