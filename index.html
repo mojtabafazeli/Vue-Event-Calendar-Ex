@@ -40,7 +40,7 @@
                     <div v-if="show" class="days">
                         <date :i='i' :eventindex=getEventIndex(i)
                             :data-target="(i > dateObject.firstDayOfMonth && i <= dateObject.lastDateOfMonth + dateObject.firstDayOfMonth)?'#myModal':''"
-                            data-toggle="modal" :data-date=getEventDate(i) :data-index=i :key="componentKey + i"
+                            data-toggle="modal" :data-index=i :key="componentKey + i"
                             v-for='i in calcNumOfSquares( dateObject.lastDateOfMonth + dateObject.firstDayOfMonth > 35)'>
                         </date>
                     </div>
