@@ -38,8 +38,7 @@
                 </div>
                 <transition name="slide-fade">
                     <div v-if="show" class="days">
-                        <date :i='i' :today='today' :dateobject='dateObject' :events='events'
-                            :eventindex=getEventIndex(i)
+                        <date :i='i' :eventindex=getEventIndex(i)
                             :data-target="(i > dateObject.firstDayOfMonth && i <= dateObject.lastDateOfMonth + dateObject.firstDayOfMonth)?'#myModal':''"
                             data-toggle="modal" :data-title=getEventTitle(i) :data-date=getEventDate(i)
                             :data-time=getEventTime(i) :key="componentKey + i"

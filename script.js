@@ -18,7 +18,7 @@ let $dateObject = {
 
 
 Vue.component('date', {
-    props: ['i', 'today', 'dateobject', 'events', 'eventindex', 'key'],
+    props: ['i', 'eventindex', 'key'],
     template: `
      <div class="card date px-2 py-1">
                         <p :style = "{visibility: i > this.$root.dateObject.firstDayOfMonth && i <= this.$root.dateObject.lastDateOfMonth + this.$root.dateObject.firstDayOfMonth? 'visible' : 'hidden'}" >
