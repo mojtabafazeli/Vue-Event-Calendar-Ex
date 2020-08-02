@@ -21,16 +21,16 @@ Vue.component('date', {
     props: ['i', 'today', 'dateobject', 'events', 'eventindex', 'key'],
     template: `
      <div class="card date px-2 py-1">
-                        <p :style = "{visibility: i > dateobject.firstDayOfMonth && i <= dateobject.lastDateOfMonth + dateobject.firstDayOfMonth? 'visible' : 'hidden'}" >
-                        <span :class = "i - dateobject.firstDayOfMonth == today.date && 
-                        dateobject.month == today.month &&
-                            dateobject.year == today.year ? 'today-date' : ''">
-                            {{i - dateobject.firstDayOfMonth}}
+                        <p :style = "{visibility: i > this.$root.dateObject.firstDayOfMonth && i <= this.$root.dateObject.lastDateOfMonth + this.$root.dateObject.firstDayOfMonth? 'visible' : 'hidden'}" >
+                        <span :class = "i - this.$root.dateObject.firstDayOfMonth == this.$root.today.date && 
+                        this.$root.dateObject.month == this.$root.today.month &&
+                            this.$root.dateObject.year == this.$root.today.year ? 'today-date' : ''">
+                            {{i - this.$root.dateObject.firstDayOfMonth}}
                             </span>
                             </p>
-                        <div div class = "d-flex justify-content-between" v-if="events[eventindex]" >
-                            <span class="mr-1"> {{ events[eventindex].title }}</span>
-                            <span class="time">{{ events[eventindex].time }}</span>
+                        <div div class = "d-flex justify-content-between" v-if="this.$root.events[eventindex]" >
+                            <span class="mr-1"> {{ this.$root.events[eventindex].title }}</span>
+                            <span class="time">{{ this.$root.events[eventindex].time }}</span>
                         </div>
                     </div>
     `
@@ -48,6 +48,7 @@ const app = new Vue({
         eventTitle: '',
         eventDate: '',
         eventTime: '',
+        numOfSquares: 35,
         componentKey: false,
         show: true
     },
@@ -152,6 +153,13 @@ const app = new Vue({
         getEventDate: function (i) {
             let date = this.dateObject.month + " " + (i - this.dateObject.firstDayOfMonth) + " " + this.dateObject.year
             return date;
+        },
+
+        calcNumOfSquares: function (cond) {
+            if (cond) {
+                return 42
+            };
+            return 35;
         }
     },
 })

@@ -39,10 +39,11 @@
                 <transition name="slide-fade">
                     <div v-if="show" class="days">
                         <date :i='i' :today='today' :dateobject='dateObject' :events='events'
-                            :eventindex=getEventIndex(i) v-for="i in 35"
+                            :eventindex=getEventIndex(i)
                             :data-target="(i > dateObject.firstDayOfMonth && i <= dateObject.lastDateOfMonth + dateObject.firstDayOfMonth)?'#myModal':''"
                             data-toggle="modal" :data-title=getEventTitle(i) :data-date=getEventDate(i)
-                            :data-time=getEventTime(i) :key="componentKey + i">
+                            :data-time=getEventTime(i) :key="componentKey + i"
+                            v-for='i in calcNumOfSquares( dateObject.lastDateOfMonth + dateObject.firstDayOfMonth > 35)'>
                         </date>
                     </div>
                 </transition>
