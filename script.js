@@ -155,8 +155,16 @@ const app = new Vue({
             return date;
         },
 
-        calcNumOfSquares: function (cond) {
-            if (cond) {
+        getEventDescription: function (i) {
+            if (this.events[this.dateObject.year + "-" + (this.months.indexOf(this.dateObject.month) + 1) + "-" + (i - this.dateObject.firstDayOfMonth)]) {
+                let title = this.events[this.dateObject.year + "-" + (this.months.indexOf(this.dateObject.month) + 1) + "-" + (i - this.dateObject.firstDayOfMonth)].desc;
+                return title;
+            }
+        },
+
+
+        calcNumOfSquares: function () {
+            if (this.dateObject.lastDateOfMonth + this.dateObject.firstDayOfMonth > 35) {
                 return 42
             };
             return 35;

@@ -4,6 +4,7 @@ $('#myModal').on('show.bs.modal', function (event) {
 
     var modal = $(this)
     modal.find('.title').val(app.getEventTitle(index))
+    modal.find('.desc').val(app.getEventDescription(index))
     try {
         modal.find('.date').val(new Date(app.getEventDate(index)).toISOString().substr(0, 10));
     } catch (e) {
